@@ -13,20 +13,24 @@
     
      <TextView
         android:id="@+id/url"
+        android:paddingBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/url" />
+        android:text="@string/url_user" />
     <EditText 
         android:id="@+id/urlTextField"
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text="urbanoutfitters.tumblr.com"/>
-	<Button 
-	    android:id="@+id/loadButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="LOAD"/>
-    
+
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="LOAD" />
 
 </LinearLayout>
