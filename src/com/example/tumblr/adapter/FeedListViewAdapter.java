@@ -15,7 +15,7 @@ import com.example.tumblr.model.FeedVO;
 import com.example.tumblr.task.ImageDownloader;
 
 /**
- * Rss List View Adapter
+ * Feed List View Adapter
  * 
  * @author Cesar Oyarzun
  * 

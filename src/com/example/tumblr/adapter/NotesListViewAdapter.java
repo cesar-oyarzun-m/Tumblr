@@ -15,7 +15,7 @@ import com.example.tumblr.model.NoteVO;
 import com.example.tumblr.task.ImageDownloader;
 
 /**
- * Rss List View Adapter
+ * Notes List View Adapter
  * 
  * @author Cesar Oyarzun
  * 

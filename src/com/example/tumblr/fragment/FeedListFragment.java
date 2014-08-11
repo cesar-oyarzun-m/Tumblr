@@ -17,12 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.tumblr.R;
 import com.example.tumblr.FeedDetailPagerActivity;
+import com.example.tumblr.R;
 import com.example.tumblr.adapter.FeedListViewAdapter;
 import com.example.tumblr.listener.ListViewScrollListener;
 import com.example.tumblr.model.FeedVO;
-import com.example.tumblr.model.TumblrModel;
 import com.example.tumblr.task.ImageDownloader;
 import com.example.tumblr.task.TumblrLoadTask;
 
@@ -114,7 +113,6 @@ public class FeedListFragment extends ListFragment {
 					this.imageThread);
 			listView.setAdapter(listViewAdapter);
 		} else {
-//			listViewAdapter.clear();
 			listViewAdapter.addAll(listFeed);
 			listViewAdapter.notifyDataSetChanged();
 		}
@@ -140,13 +138,9 @@ public class FeedListFragment extends ListFragment {
 			}
 			return true;
 		case R.id.menu_item_refresh:
-//			TumblrModel.getInstance().clearListFeed();
 			listViewAdapter.clear();
 			listFeed=new  ArrayList<FeedVO>();
 			new TumblrLoadTask(this).execute(urlFeed);
-//			listViewAdapter.setListRss(new ArrayList<FeedVO>());
-//			setupAdapter();
-//			listViewAdapter.notifyDataSetChanged();
 		default:
 			return super.onOptionsItemSelected(item);
 		}

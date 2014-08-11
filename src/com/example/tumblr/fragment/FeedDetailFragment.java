@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.tumblr.FeedListActivity;
 import com.example.tumblr.FeedUserListActivity;
 import com.example.tumblr.R;
 import com.example.tumblr.adapter.NotesListViewAdapter;

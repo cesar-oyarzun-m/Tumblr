@@ -1,7 +1,6 @@
 package com.example.tumblr;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.support.v4.view.ViewPager;
 
 import com.example.tumblr.fragment.FeedDetailFragment;
 import com.example.tumblr.model.FeedVO;
-import com.example.tumblr.model.TumblrModel;
 
 /**
  * Detail Feed Pager Activity to swipe on the list
@@ -20,7 +18,7 @@ import com.example.tumblr.model.TumblrModel;
  * @author Cesar Oyarzun
  * 
  */
-public class FeedDetailPagerActivity extends FragmentActivity  {
+public class FeedDetailPagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private ArrayList<FeedVO> feedModel;
 
@@ -29,14 +27,9 @@ public class FeedDetailPagerActivity extends FragmentActivity  {
 		super.onCreate(savedInstanceState);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
-		
 		setContentView(mViewPager);
-		if(savedInstanceState!=null){
-			feedModel = (ArrayList<FeedVO>) savedInstanceState.get("model");
-		}else{
-			feedModel = (ArrayList<FeedVO>) getIntent().getSerializableExtra(FeedDetailFragment.MODEL);	
-		}
-		
+		feedModel = (ArrayList<FeedVO>) getIntent().getSerializableExtra(
+				FeedDetailFragment.MODEL);
 		FragmentManager fm = getSupportFragmentManager();
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
 			@Override
@@ -51,7 +44,8 @@ public class FeedDetailPagerActivity extends FragmentActivity  {
 			}
 		});
 
-		FeedVO feed = (FeedVO) getIntent().getSerializableExtra(FeedDetailFragment.SELECTED_FEED);
+		FeedVO feed = (FeedVO) getIntent().getSerializableExtra(
+				FeedDetailFragment.SELECTED_FEED);
 		getActionBar().setTitle(feed.getTitle());
 		for (int i = 0; i < feedModel.size(); i++) {
 			if (feedModel.get(i).getTitle().equals(feed.getTitle())) {
@@ -73,18 +67,10 @@ public class FeedDetailPagerActivity extends FragmentActivity  {
 						FeedVO word = feedModel.get(pos);
 						if (word.getTitle() != null) {
 							setTitle(word.getTitle());
-							getActionBar().setTitle(word.getTitle());;
+							getActionBar().setTitle(word.getTitle());
 						}
 					}
 				});
 	}
-	
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
-		outState.putSerializable("Model", feedModel);
-		super.onSaveInstanceState(outState);
-	}
-
 
 }
