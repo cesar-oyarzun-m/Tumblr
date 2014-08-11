@@ -75,11 +75,14 @@ public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 				if(photoPost.getNoteCount()!=null){
 					feedVO.setNotes_count(Long.toString(photoPost.getNoteCount()));
 				}
-				
-				Photo photo = photoPost.getPhotos().get(0);
-				PhotoSize photoSize = photo.getSizes().get(0);
-				String url = photoSize.getUrl();
-				feedVO.setUrlImage(url);
+				if( photoPost.getPhotos()!=null && photoPost.getPhotos().get(0)!=null){
+					Photo photo = photoPost.getPhotos().get(0);
+					if(photo!=null && photo.getSizes().get(0)!=null){
+						PhotoSize photoSize = photo.getSizes().get(0);
+						String url = photoSize.getUrl();
+						feedVO.setUrlImage(url);
+					}
+				}
 				TumblrModel.getInstance().getListRss().add(feedVO);
 			}
 		}
