@@ -1,5 +1,6 @@
 package com.example.tumblr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -21,15 +22,21 @@ import com.example.tumblr.model.TumblrModel;
  */
 public class FeedDetailPagerActivity extends FragmentActivity  {
 	private ViewPager mViewPager;
-	private List<FeedVO> feedModel;
+	private ArrayList<FeedVO> feedModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
+		
 		setContentView(mViewPager);
-		feedModel = TumblrModel.getInstance().getListRss();
+		if(savedInstanceState!=null){
+			feedModel = (ArrayList<FeedVO>) savedInstanceState.get("model");
+		}else{
+			feedModel = (ArrayList<FeedVO>) getIntent().getSerializableExtra(FeedDetailFragment.MODEL);	
+		}
+		
 		FragmentManager fm = getSupportFragmentManager();
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
 			@Override
@@ -72,6 +79,12 @@ public class FeedDetailPagerActivity extends FragmentActivity  {
 				});
 	}
 	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		outState.putSerializable("Model", feedModel);
+		super.onSaveInstanceState(outState);
+	}
 
 
 }

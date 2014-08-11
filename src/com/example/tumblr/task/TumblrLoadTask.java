@@ -13,7 +13,9 @@ import android.os.AsyncTask;
 
 import com.example.tumblr.fragment.FeedListFragment;
 import com.example.tumblr.model.FeedVO;
+import com.example.tumblr.model.NoteVO;
 import com.example.tumblr.model.TumblrModel;
+import com.tumblr.jumblr.types.Note;
 import com.tumblr.jumblr.types.Photo;
 import com.tumblr.jumblr.types.PhotoPost;
 import com.tumblr.jumblr.types.PhotoSize;
@@ -25,9 +27,10 @@ import com.tumblr.jumblr.types.Post;
  *
  */
 public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
+	private static final String REBLOG = "reblog";
 	private static final String LOADING = "Loading....";
 	private static final String P_HTML = "p";
-	private static final String LIMIT_SIZE = "10";
+	private static final String LIMIT_SIZE = "5";
 	private static final String LIMIT = "limit";
 	private static final String OFFSET = "offset";
 	private static final String STRONG = "strong";
@@ -83,7 +86,16 @@ public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 						feedVO.setUrlImage(url);
 					}
 				}
-				TumblrModel.getInstance().getListRss().add(feedVO);
+				if(photoPost.getNotes()!=null){
+					List<Note> notes = photoPost.getNotes();
+					for (Note note : notes) {
+						if(REBLOG.equalsIgnoreCase(note.getType())){
+							NoteVO noteVO=new NoteVO(note.getBlogName());
+							feedVO.getReblog().add(noteVO);
+						}
+					}
+				}
+				this.rssListFragment.getListFeed().add(feedVO);
 			}
 		}
 		return null;

@@ -17,6 +17,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name=".FeedUserListActivity"
+            android:label="@string/app_name" 
+            android:launchMode="singleTop">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+        		android:value=".FeedDetailPagerActivity"/>
+        </activity>
         <activity
             android:name=".FeedListActivity"
             android:label="@string/app_name" 
@@ -26,7 +34,8 @@
         </activity>
         <activity
             android:name=".FeedDetailPagerActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:launchMode="singleTop">>
             <meta-data android:name="android.support.PARENT_ACTIVITY"
         		android:value=".FeedListActivity"/>
         </activity>

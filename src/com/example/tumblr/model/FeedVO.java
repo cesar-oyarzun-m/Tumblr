@@ -1,6 +1,7 @@
 package com.example.tumblr.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,17 @@ public class FeedVO implements Serializable{
 	private String urlImage;
 	private String notes_count;
 	private List<String> tags;
+	private List<NoteVO> reblog;
+	
+	
+	public FeedVO (){
+		reblog=new ArrayList<NoteVO>();
+	}
+	
+	public List<NoteVO> getReblog() {
+		return reblog;
+	}
+
 
 	public String getNotes_count() {
 		return notes_count;
