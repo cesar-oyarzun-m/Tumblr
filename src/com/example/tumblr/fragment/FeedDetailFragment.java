@@ -21,6 +21,7 @@ import com.example.tumblr.model.TumblrModel;
  *
  */
 public class FeedDetailFragment extends Fragment {
+	private static final String NOTES = " Notes";
 	public static final String SELECTED_FEED = "selected_feed";
 	public static final String MODEL = "model";
 	
@@ -58,22 +59,18 @@ public class FeedDetailFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_rss_detail, container,false);
+		View rootView = inflater.inflate(R.layout.fragment_feed_detail, container,false);
 		FeedVO feedVO = (FeedVO) getArguments().getSerializable(FeedDetailFragment.SELECTED_FEED);
 		TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 		titleTextView.setText(feedVO.getTitle());
 		ImageView image = (ImageView) rootView.findViewById(R.id.imageViewDetail);
 		Bitmap bitmap = TumblrModel.getInstance().getmMemoryCache().get(feedVO.getUrlImage());
 		image.setImageBitmap(bitmap);
-		TextView descriptionTextView = (TextView) rootView.findViewById(R.id.desc);
-		descriptionTextView.setText(feedVO.getDesc());
-		TextView postTextView = (TextView) rootView.findViewById(R.id.post);
-		postTextView.setText(feedVO.getLink());
-		TextView hRefTextView = (TextView) rootView.findViewById(R.id.href);
-		hRefTextView.setText(feedVO.getHref());
 		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 		TextView tagsTextView = (TextView) rootView.findViewById(R.id.tags);
-		tagsTextView.setText(feedVO.getTags().toString());
+		tagsTextView.setText(feedVO.getTagsToString());
+		TextView notesCountTextView = (TextView) rootView.findViewById(R.id.notes_count);
+		notesCountTextView.setText(feedVO.getNotes_count()+NOTES);
 		
 		return rootView;
 	}

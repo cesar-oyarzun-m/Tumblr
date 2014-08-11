@@ -14,7 +14,6 @@ import android.os.AsyncTask;
 import com.example.tumblr.fragment.FeedListFragment;
 import com.example.tumblr.model.FeedVO;
 import com.example.tumblr.model.TumblrModel;
-import com.tumblr.jumblr.JumblrClient;
 import com.tumblr.jumblr.types.Photo;
 import com.tumblr.jumblr.types.PhotoPost;
 import com.tumblr.jumblr.types.PhotoSize;
@@ -27,8 +26,6 @@ import com.tumblr.jumblr.types.Post;
  */
 public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 	private static final String LOADING = "Loading....";
-	private static final String HREF = "href";
-	private static final String A_HREF = "a[href]";
 	private static final String P_HTML = "p";
 	private static final String LIMIT_SIZE = "10";
 	private static final String LIMIT = "limit";
@@ -51,54 +48,39 @@ public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 	
 	@Override
 	protected List<FeedVO> doInBackground(String... params) {
-		// Authenticate via OAuth
-		JumblrClient client = new JumblrClient(
-		  "upOiHxQOt1Hjbpp1jp4cvxlRIzfjiKlQA2aMG2kQ70ez62qizT",
-		  "b62mUCiADy3C301d0FOLQvnEOXYwbeqgLmqvTHukaL5DEov5oJ"
-		);
-		client.setToken(
-		  "6ZeiYLpTXvqakyDknhl6mb6s5R0K1IrV9iHOOKX4IWTwX2beUD",
-		  "NucxlQuS4Hm1tqF9S4BRSkZJJds5HVM7ME29dhMeLaKZPQn1Fu"
-		);
-
 		Map<String, String> options = new HashMap<String, String>();
 		options.put(LIMIT, LIMIT_SIZE);
+		options.put("notes_info", "true");
 		if(params.length==2){
 			options.put(OFFSET, params[1]);	
 		}
-		
-		List<Post> blogPosts = client.blogPosts(params[0],options);
+		List<Post> blogPosts = TumblrModel.getInstance().getClient().blogPosts(params[0],options);
 		for (Post post : blogPosts) {
 			if(post instanceof PhotoPost){
 				PhotoPost photoPost=(PhotoPost) post;
-				FeedVO rssVO=new FeedVO();
+				FeedVO feedVO=new FeedVO();
 				Document doc = Jsoup.parse(photoPost.getCaption().toString());
 				Element strong = doc.select(STRONG).first();
 				Element p = doc.select(P_HTML).first();
 				if(strong!=null){
-					rssVO.setTitle(strong.text());
+					feedVO.setTitle(strong.text());
 				}else if(p!=null){
-					rssVO.setTitle(p.text());
+					feedVO.setTitle(p.text());
 				}
 				
-				Element href = doc.select(A_HREF).first();
-				if(href!=null){
-					String hrefVal = href.attr(HREF);
-					rssVO.setHref(hrefVal);
-				}
-				if(post.getShortUrl()!=null){
-					rssVO.setLink(post.getShortUrl());
-				}
 				List<String> tags = photoPost.getTags();
 				if(tags!=null){
-					rssVO.setTags(tags);
+					feedVO.setTags(tags);
+				}
+				if(photoPost.getNoteCount()!=null){
+					feedVO.setNotes_count(Long.toString(photoPost.getNoteCount()));
 				}
 				
 				Photo photo = photoPost.getPhotos().get(0);
 				PhotoSize photoSize = photo.getSizes().get(0);
 				String url = photoSize.getUrl();
-				rssVO.setUrlImage(url);
-				TumblrModel.getInstance().getListRss().add(rssVO);
+				feedVO.setUrlImage(url);
+				TumblrModel.getInstance().getListRss().add(feedVO);
 			}
 		}
 		return null;

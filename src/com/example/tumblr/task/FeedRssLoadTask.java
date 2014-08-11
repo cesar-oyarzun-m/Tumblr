@@ -65,8 +65,6 @@ public class FeedRssLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 							rssVO.setTitle(xpp.nextText());
 
 					} else if (xpp.getName().equalsIgnoreCase(LINK)) {
-						if (insideItem)
-							rssVO.setLink(xpp.nextText());
 					} else if (xpp.getName().equalsIgnoreCase(DESCRIPTION)) {
 						if (insideItem) {
 							String nextText = xpp.nextText();
@@ -78,9 +76,6 @@ public class FeedRssLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 							}
 							Element href = doc.select("a[href]").first();
 							String hrefVal = href.attr("href");
-							rssVO.setHref(hrefVal);
-							rssVO.setDesc(nextText);
-							
 						}
 					}
 

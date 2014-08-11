@@ -2,10 +2,11 @@ package com.example.tumblr.model;
 
 import java.util.ArrayList;
 
+import com.tumblr.jumblr.JumblrClient;
+
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
-
 
 /**
  * Model singleton class
@@ -17,6 +18,7 @@ public class TumblrModel {
 	private static TumblrModel model = null;
 	private LruCache<String, Bitmap> mMemoryCache;
 	private ArrayList<FeedVO> listRss = null;
+	private JumblrClient client=null;
 
 	@TargetApi(12)
 	public TumblrModel() {
@@ -37,6 +39,12 @@ public class TumblrModel {
 			}
 		};
 		listRss = new ArrayList<FeedVO>();
+		// Authenticate via OAuth
+		client = new JumblrClient(
+				"upOiHxQOt1Hjbpp1jp4cvxlRIzfjiKlQA2aMG2kQ70ez62qizT",
+				"b62mUCiADy3C301d0FOLQvnEOXYwbeqgLmqvTHukaL5DEov5oJ");
+		client.setToken("6ZeiYLpTXvqakyDknhl6mb6s5R0K1IrV9iHOOKX4IWTwX2beUD",
+				"NucxlQuS4Hm1tqF9S4BRSkZJJds5HVM7ME29dhMeLaKZPQn1Fu");
 	}
 
 	/**
@@ -51,17 +59,19 @@ public class TumblrModel {
 		}
 		return model;
 	}
-	
+
 	/**
 	 * Get image chache
+	 * 
 	 * @return LruCache
 	 */
 	public LruCache<String, Bitmap> getmMemoryCache() {
 		return mMemoryCache;
 	}
-	
+
 	/**
 	 * Get list feed
+	 * 
 	 * @return
 	 */
 	public ArrayList<FeedVO> getListRss() {
@@ -71,8 +81,15 @@ public class TumblrModel {
 	/**
 	 * Clear list Feeds
 	 */
-	public void clearListFeed(){
-		this.listRss=new ArrayList<FeedVO>();
+	public void clearListFeed() {
+		this.listRss = new ArrayList<FeedVO>();
 	}
 	
+	/**
+	 * Get Tumbrl Client
+	 * @return
+	 */
+	public JumblrClient getClient() {
+		return client;
+	}
 }

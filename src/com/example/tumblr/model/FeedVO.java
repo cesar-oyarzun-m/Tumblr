@@ -1,8 +1,9 @@
 package com.example.tumblr.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.graphics.Bitmap;
 
@@ -17,26 +18,22 @@ public class FeedVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String title;
-	private String desc;
-	private String link;
 	private Bitmap image;
 	private String urlImage;
-	private String href;
+	private String notes_count;
 	private List<String> tags;
-	
-	
-	
+
+	public String getNotes_count() {
+		return notes_count;
+	}
+	public void setNotes_count(String notes_count) {
+		this.notes_count = notes_count;
+	}
 	public List<String> getTags() {
 		return tags;
 	}
 	public void setTags(List<String> tags) {
 		this.tags = tags;
-	}
-	public String getHref() {
-		return href;
-	}
-	public void setHref(String href) {
-		this.href = href;
 	}
 	public String getUrlImage() {
 		return urlImage;
@@ -50,23 +47,13 @@ public class FeedVO implements Serializable{
 	public void setImage(Bitmap image) {
 		this.image = image;
 	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDesc() {
-		return desc;
+	public String getTagsToString(){
+		return  StringUtils.join(tags.toArray(), ",");
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
 }
