@@ -86,7 +86,14 @@ public class TumblrLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 					String hrefVal = href.attr(HREF);
 					rssVO.setHref(hrefVal);
 				}
-				rssVO.setLink(post.getShortUrl());
+				if(post.getShortUrl()!=null){
+					rssVO.setLink(post.getShortUrl());
+				}
+				List<String> tags = photoPost.getTags();
+				if(tags!=null){
+					rssVO.setTags(tags);
+				}
+				
 				Photo photo = photoPost.getPhotos().get(0);
 				PhotoSize photoSize = photo.getSizes().get(0);
 				String url = photoSize.getUrl();

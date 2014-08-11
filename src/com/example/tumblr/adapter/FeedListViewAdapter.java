@@ -105,6 +105,7 @@ public class FeedListViewAdapter extends ArrayAdapter<FeedVO> {
 		} else {
 			// no need to inflate no need to findViews by id
 			holder = (ViewHolderItem) vi.getTag();
+			holder.imageViewItem.setImageDrawable(context.getResources().getDrawable(R.drawable.empty_photo));
 		}
 		FeedVO item = getItem(position);
 		holder.textView.setText(item.getTitle());

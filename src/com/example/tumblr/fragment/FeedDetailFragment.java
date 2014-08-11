@@ -59,19 +59,22 @@ public class FeedDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_rss_detail, container,false);
-		FeedVO rssVO = (FeedVO) getArguments().getSerializable(FeedDetailFragment.SELECTED_FEED);
+		FeedVO feedVO = (FeedVO) getArguments().getSerializable(FeedDetailFragment.SELECTED_FEED);
 		TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
-		titleTextView.setText(rssVO.getTitle());
+		titleTextView.setText(feedVO.getTitle());
 		ImageView image = (ImageView) rootView.findViewById(R.id.imageViewDetail);
-		Bitmap bitmap = TumblrModel.getInstance().getmMemoryCache().get(rssVO.getUrlImage());
+		Bitmap bitmap = TumblrModel.getInstance().getmMemoryCache().get(feedVO.getUrlImage());
 		image.setImageBitmap(bitmap);
 		TextView descriptionTextView = (TextView) rootView.findViewById(R.id.desc);
-		descriptionTextView.setText(rssVO.getDesc());
+		descriptionTextView.setText(feedVO.getDesc());
 		TextView postTextView = (TextView) rootView.findViewById(R.id.post);
-		postTextView.setText(rssVO.getLink());
+		postTextView.setText(feedVO.getLink());
 		TextView hRefTextView = (TextView) rootView.findViewById(R.id.href);
-		hRefTextView.setText(rssVO.getHref());
+		hRefTextView.setText(feedVO.getHref());
 		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		TextView tagsTextView = (TextView) rootView.findViewById(R.id.tags);
+		tagsTextView.setText(feedVO.getTags().toString());
+		
 		return rootView;
 	}
 

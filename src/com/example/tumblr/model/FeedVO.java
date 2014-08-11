@@ -1,6 +1,8 @@
 package com.example.tumblr.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Bitmap;
 
@@ -20,9 +22,16 @@ public class FeedVO implements Serializable{
 	private Bitmap image;
 	private String urlImage;
 	private String href;
+	private List<String> tags;
 	
 	
 	
+	public List<String> getTags() {
+		return tags;
+	}
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
 	public String getHref() {
 		return href;
 	}
