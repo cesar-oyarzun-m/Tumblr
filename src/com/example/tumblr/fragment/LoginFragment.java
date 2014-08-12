@@ -1,7 +1,6 @@
 package com.example.tumblr.fragment;
 
 import android.content.Context;
-
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,9 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tumblr.R;
 import com.example.tumblr.FeedListActivity;
-import com.example.tumblr.model.TumblrModel;
+import com.example.tumblr.R;
 
 /**
  * Load Info from User or URL feed
@@ -49,7 +47,6 @@ public class LoginFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				if (isOnline()) {
-					TumblrModel.getInstance().clearListFeed();
 					Intent intent = new Intent(getActivity().getApplicationContext(), FeedListActivity.class);
 					intent.putExtra(URL,urlTextView.getText().toString());
 					startActivity(intent);

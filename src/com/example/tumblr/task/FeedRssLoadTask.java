@@ -17,7 +17,6 @@ import android.os.AsyncTask;
 
 import com.example.tumblr.fragment.FeedListFragment;
 import com.example.tumblr.model.FeedVO;
-import com.example.tumblr.model.TumblrModel;
 
 /**
  * Feed reader from RSS
@@ -74,15 +73,12 @@ public class FeedRssLoadTask extends AsyncTask<String, Void, List<FeedVO>> {
 								String imageURL = first.attr(SRC);
 								rssVO.setUrlImage(imageURL);
 							}
-							Element href = doc.select("a[href]").first();
-							String hrefVal = href.attr("href");
 						}
 					}
 
 				} else if (eventType == XmlPullParser.END_TAG
 						&& xpp.getName().equalsIgnoreCase(ITEM)) {
 					insideItem = false;
-					TumblrModel.getInstance().getListRss().add(rssVO);
 					rssVO = null;
 				}
 				eventType = xpp.next(); 

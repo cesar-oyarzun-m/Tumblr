@@ -110,7 +110,7 @@ public class NotesListViewAdapter extends ArrayAdapter<NoteVO> {
 			holder.imageViewItem.setImageDrawable(context.getResources().getDrawable(R.drawable.photo_48));
 		}
 		NoteVO item = getItem(position);
-		holder.textView.setText(item.getName());
+		holder.textView.setText(item.getName()+" reblogged this");
 		imageThreadDownloader.queueThumbnail(holder.imageViewItem,
 				HTTP_API_TUMBLR_COM_V2_BLOG+listRss.get(position).getName()+TUMBLR_COM_AVATAR_48);
 		return vi;

@@ -108,9 +108,9 @@ public class FeedDetailFragment extends Fragment {
 			}
 		});
 		listView.setAdapter(new NotesListViewAdapter(getActivity(), R.id.listNotes, feedVO.getReblog(), this.imageThread));
-		
 		return rootView;
 	}
+	
 	
 	
 	@Override

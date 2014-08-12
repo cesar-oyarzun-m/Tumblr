@@ -22,6 +22,7 @@ public class FeedDetailPagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private ArrayList<FeedVO> feedModel;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -1,12 +1,10 @@
 package com.example.tumblr.model;
 
-import java.util.ArrayList;
-
-import com.tumblr.jumblr.JumblrClient;
-
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+
+import com.tumblr.jumblr.JumblrClient;
 
 /**
  * Model singleton class
@@ -17,7 +15,6 @@ import android.support.v4.util.LruCache;
 public class TumblrModel {
 	private static TumblrModel model = null;
 	private LruCache<String, Bitmap> mMemoryCache;
-	private ArrayList<FeedVO> listRss = null;
 	private JumblrClient client=null;
 
 	@TargetApi(12)
@@ -38,7 +35,6 @@ public class TumblrModel {
 				return bitmap.getByteCount() / 1024;
 			}
 		};
-		listRss = new ArrayList<FeedVO>();
 		// Authenticate via OAuth
 		client = new JumblrClient(
 				"upOiHxQOt1Hjbpp1jp4cvxlRIzfjiKlQA2aMG2kQ70ez62qizT",
@@ -69,21 +65,6 @@ public class TumblrModel {
 		return mMemoryCache;
 	}
 
-	/**
-	 * Get list feed
-	 * 
-	 * @return
-	 */
-	public ArrayList<FeedVO> getListRss() {
-		return listRss;
-	}
-
-	/**
-	 * Clear list Feeds
-	 */
-	public void clearListFeed() {
-		this.listRss = new ArrayList<FeedVO>();
-	}
 	
 	/**
 	 * Get Tumbrl Client
